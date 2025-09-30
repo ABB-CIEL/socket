@@ -25,8 +25,8 @@ namespace socketUDP
             {
                 udpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
-                IPAddress ipLocal = IPAddress.Parse(Recp.Text); // IP réception
-                int portLocal = int.Parse(textBox4.Text);       // Port réception
+                IPAddress ipLocal = IPAddress.Parse(textBox1.Text); // IP réception
+                int portLocal = int.Parse(textBox2.Text);       // Port réception
                 ipEndPointLocal = new IPEndPoint(ipLocal, portLocal);
 
                 udpSocket.Bind(ipEndPointLocal);
@@ -46,8 +46,8 @@ namespace socketUDP
                 string message = envoi.Text;
                 byte[] msg = Encoding.ASCII.GetBytes(message);
 
-                IPAddress ipDest = IPAddress.Parse(textBox3.Text); // IP destination
-                int portDest = int.Parse(textBox4.Text);           // Port destination
+                IPAddress ipDest = IPAddress.Parse(textBox4.Text); // IP destination
+                int portDest = int.Parse(textBox3.Text);           // Port destination
                 ipEndPointDest = new IPEndPoint(ipDest, portDest);
 
                 udpSocket.SendTo(msg, ipEndPointDest);
@@ -70,7 +70,7 @@ namespace socketUDP
                 int received = udpSocket.ReceiveFrom(buffer, ref ipEndPointFrom);
                 string receivedMessage = Encoding.ASCII.GetString(buffer, 0, received);
 
-                textBox1.Text += "Reçu : " + receivedMessage + Environment.NewLine;
+                Recp.Text += "Reçu : " + receivedMessage + Environment.NewLine;
             }
             catch (Exception ex)
             {
